@@ -1,0 +1,921 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Erica Davidson</title>
+  <style>
+    :root {
+      --navy: #1a2744;
+      --navy-light: #243260;
+      --gold: #c9a84c;
+      --gold-light: #e2c278;
+      --cream: #f8f5ef;
+      --white: #ffffff;
+      --gray: #6b7280;
+      --gray-light: #f3f4f6;
+      --text: #1f2937;
+      --border: #e5e7eb;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Georgia', serif;
+      color: var(--text);
+      background: var(--white);
+      line-height: 1.6;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: var(--navy);
+      padding: 0 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+    }
+
+    .nav-logo {
+      color: var(--gold);
+      font-size: 1.1rem;
+      font-weight: bold;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: rgba(255,255,255,0.8);
+      text-decoration: none;
+      font-family: 'Arial', sans-serif;
+      font-size: 0.85rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--gold); }
+
+    /* HERO */
+    #hero {
+      min-height: 100vh;
+      background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 60%, #1e3a5f 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 6rem 2rem 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    #hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 70% 30%, rgba(201,168,76,0.08) 0%, transparent 60%);
+    }
+
+    .hero-content { position: relative; z-index: 1; max-width: 700px; }
+
+    .hero-eyebrow {
+      color: var(--gold);
+      font-family: 'Arial', sans-serif;
+      font-size: 0.8rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-bottom: 1.2rem;
+    }
+
+    .hero-name {
+      color: var(--white);
+      font-size: clamp(2.8rem, 6vw, 4.5rem);
+      font-weight: normal;
+      letter-spacing: 0.04em;
+      line-height: 1.1;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-tagline {
+      color: rgba(255,255,255,0.7);
+      font-size: 1.15rem;
+      font-style: italic;
+      margin-bottom: 2.5rem;
+      line-height: 1.7;
+    }
+
+    .hero-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      justify-content: center;
+      margin-bottom: 3rem;
+    }
+
+    .badge {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(201,168,76,0.3);
+      color: rgba(255,255,255,0.85);
+      padding: 0.4rem 1rem;
+      border-radius: 2rem;
+      font-family: 'Arial', sans-serif;
+      font-size: 0.8rem;
+      letter-spacing: 0.03em;
+    }
+
+    .hero-cta {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      padding: 0.75rem 2rem;
+      border-radius: 3px;
+      font-family: 'Arial', sans-serif;
+      font-size: 0.85rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: all 0.2s;
+      cursor: pointer;
+      border: none;
+    }
+
+    .btn-primary {
+      background: var(--gold);
+      color: var(--navy);
+      font-weight: bold;
+    }
+
+    .btn-primary:hover { background: var(--gold-light); }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--white);
+      border: 1px solid rgba(255,255,255,0.4);
+    }
+
+    .btn-outline:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+    }
+
+    /* SECTIONS */
+    section { padding: 6rem 2rem; }
+
+    .container { max-width: 900px; margin: 0 auto; }
+
+    .section-label {
+      color: var(--gold);
+      font-family: 'Arial', sans-serif;
+      font-size: 0.75rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-bottom: 0.6rem;
+    }
+
+    .section-title {
+      font-size: 2rem;
+      color: var(--navy);
+      font-weight: normal;
+      margin-bottom: 3rem;
+      padding-bottom: 1rem;
+      border-bottom: 2px solid var(--gold);
+      display: inline-block;
+    }
+
+    /* IMPACT STATS */
+    #impact {
+      background: var(--navy);
+      padding: 4rem 2rem;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 2rem;
+      text-align: center;
+    }
+
+    .stat-item {}
+
+    .stat-number {
+      font-size: 2.5rem;
+      color: var(--gold);
+      font-weight: bold;
+      display: block;
+      line-height: 1;
+      margin-bottom: 0.5rem;
+    }
+
+    .stat-label {
+      color: rgba(255,255,255,0.7);
+      font-family: 'Arial', sans-serif;
+      font-size: 0.8rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    /* ABOUT */
+    #about { background: var(--cream); }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+
+    .about-text p {
+      color: var(--gray);
+      margin-bottom: 1rem;
+      font-size: 1.05rem;
+      line-height: 1.8;
+    }
+
+    .about-details { }
+
+    .detail-block {
+      margin-bottom: 2rem;
+    }
+
+    .detail-block h4 {
+      font-family: 'Arial', sans-serif;
+      font-size: 0.75rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.75rem;
+    }
+
+    .detail-block ul {
+      list-style: none;
+    }
+
+    .detail-block ul li {
+      color: var(--gray);
+      font-size: 0.95rem;
+      padding: 0.3rem 0;
+      padding-left: 1rem;
+      position: relative;
+    }
+
+    .detail-block ul li::before {
+      content: '–';
+      position: absolute;
+      left: 0;
+      color: var(--gold);
+    }
+
+    /* EXPERIENCE */
+    #experience { background: var(--white); }
+
+    .timeline { position: relative; }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: linear-gradient(to bottom, var(--gold), var(--border));
+    }
+
+    .timeline-company {
+      margin-bottom: 3rem;
+      padding-left: 2rem;
+    }
+
+    .company-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 1.5rem;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .company-name {
+      font-size: 1.2rem;
+      color: var(--navy);
+      font-weight: bold;
+      font-family: 'Arial', sans-serif;
+    }
+
+    .company-location {
+      color: var(--gray);
+      font-family: 'Arial', sans-serif;
+      font-size: 0.9rem;
+    }
+
+    .timeline-dot {
+      position: absolute;
+      left: -5px;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--gold);
+      border: 2px solid var(--white);
+      margin-top: 4px;
+    }
+
+    .role {
+      margin-bottom: 1.5rem;
+      position: relative;
+    }
+
+    .role-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 0.75rem;
+      flex-wrap: wrap;
+      gap: 0.25rem;
+    }
+
+    .role-title {
+      font-size: 1rem;
+      color: var(--navy);
+      font-style: italic;
+    }
+
+    .role-date {
+      color: var(--gold);
+      font-family: 'Arial', sans-serif;
+      font-size: 0.85rem;
+      font-weight: bold;
+    }
+
+    .role ul {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    .role ul li {
+      color: var(--gray);
+      font-size: 0.95rem;
+      line-height: 1.7;
+      padding: 0.35rem 0 0.35rem 1.25rem;
+      position: relative;
+      border-bottom: 1px solid var(--gray-light);
+    }
+
+    .role ul li:last-child { border-bottom: none; }
+
+    .role ul li::before {
+      content: '▸';
+      position: absolute;
+      left: 0;
+      color: var(--gold);
+      font-size: 0.7rem;
+      top: 0.55rem;
+    }
+
+    .highlight {
+      color: var(--navy);
+      font-weight: bold;
+    }
+
+    /* EDUCATION */
+    #education { background: var(--cream); }
+
+    .edu-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+    }
+
+    .edu-card {
+      background: var(--white);
+      padding: 2rem;
+      border-radius: 4px;
+      border-top: 3px solid var(--gold);
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    }
+
+    .edu-school {
+      font-family: 'Arial', sans-serif;
+      font-size: 0.85rem;
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--navy);
+      margin-bottom: 0.25rem;
+    }
+
+    .edu-degree {
+      font-style: italic;
+      color: var(--gray);
+      font-size: 0.95rem;
+      margin-bottom: 0.5rem;
+      line-height: 1.4;
+    }
+
+    .edu-date {
+      color: var(--gold);
+      font-family: 'Arial', sans-serif;
+      font-size: 0.8rem;
+      font-weight: bold;
+      margin-bottom: 1rem;
+    }
+
+    .edu-details {
+      list-style: none;
+      margin-top: 0.75rem;
+    }
+
+    .edu-details li {
+      color: var(--gray);
+      font-size: 0.88rem;
+      padding: 0.2rem 0;
+      padding-left: 0.9rem;
+      position: relative;
+    }
+
+    .edu-details li::before {
+      content: '·';
+      position: absolute;
+      left: 0;
+      color: var(--gold);
+      font-weight: bold;
+    }
+
+    /* SKILLS */
+    #skills { background: var(--white); }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 2rem;
+    }
+
+    .skill-category h4 {
+      font-family: 'Arial', sans-serif;
+      font-size: 0.75rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .skill-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .skill-tag {
+      background: var(--gray-light);
+      color: var(--navy);
+      padding: 0.35rem 0.85rem;
+      border-radius: 2px;
+      font-family: 'Arial', sans-serif;
+      font-size: 0.82rem;
+    }
+
+    /* COMMUNITY */
+    #community { background: var(--navy); }
+
+    #community .section-title { color: var(--white); }
+
+    .community-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .community-card {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(201,168,76,0.2);
+      border-radius: 4px;
+      padding: 1.75rem;
+    }
+
+    .community-icon {
+      font-size: 1.5rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .community-title {
+      color: var(--gold);
+      font-family: 'Arial', sans-serif;
+      font-size: 0.85rem;
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.5rem;
+    }
+
+    .community-desc {
+      color: rgba(255,255,255,0.65);
+      font-size: 0.9rem;
+      line-height: 1.6;
+    }
+
+    /* CONTACT */
+    #contact { background: var(--cream); text-align: center; }
+
+    .contact-intro {
+      color: var(--gray);
+      font-size: 1.05rem;
+      max-width: 500px;
+      margin: 0 auto 3rem;
+      line-height: 1.8;
+    }
+
+    .contact-links {
+      display: flex;
+      gap: 1.5rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .contact-link {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--navy);
+      text-decoration: none;
+      font-family: 'Arial', sans-serif;
+      font-size: 0.9rem;
+      padding: 0.75rem 1.5rem;
+      border: 1px solid var(--border);
+      border-radius: 3px;
+      background: var(--white);
+      transition: all 0.2s;
+    }
+
+    .contact-link:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+
+    .contact-link svg { flex-shrink: 0; }
+
+    /* FOOTER */
+    footer {
+      background: var(--navy);
+      text-align: center;
+      padding: 1.5rem;
+      color: rgba(255,255,255,0.4);
+      font-family: 'Arial', sans-serif;
+      font-size: 0.8rem;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 700px) {
+      .about-grid, .edu-grid { grid-template-columns: 1fr; }
+      .nav-links { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <span class="nav-logo">Erica Davidson</span>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#education">Education</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-content">
+      <p class="hero-eyebrow">Operations &amp; Product Leader</p>
+      <h1 class="hero-name">Erica Davidson</h1>
+      <p class="hero-tagline">
+        MBA Candidate at Wharton &middot; AI Product Manager &middot; Lean Six Sigma Green Belt<br>
+        Driving operational excellence and enterprise-wide transformation
+      </p>
+      <div class="hero-badges">
+        <span class="badge">Product Management</span>
+        <span class="badge">AI &amp; Automation</span>
+        <span class="badge">Process Improvement</span>
+        <span class="badge">Operations Strategy</span>
+        <span class="badge">Six Sigma</span>
+      </div>
+      <div class="hero-cta">
+        <a href="#experience" class="btn btn-primary">View My Work</a>
+        <a href="#contact" class="btn btn-outline">Get In Touch</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- IMPACT STATS -->
+  <section id="impact">
+    <div class="container">
+      <div class="stats-grid">
+        <div class="stat-item">
+          <span class="stat-number">$9M+</span>
+          <span class="stat-label">Projected Annual Savings Led</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-number">40%</span>
+          <span class="stat-label">Projected Turnaround Reduction</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-number">95%</span>
+          <span class="stat-label">Team Retention Rate</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-number">$4.8M</span>
+          <span class="stat-label">Automation Pipeline Savings</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="container">
+      <p class="section-label">About Me</p>
+      <h2 class="section-title">Who I Am</h2>
+      <div class="about-grid">
+        <div class="about-text">
+          <p>
+            I'm an operations and product leader with a track record of turning complex operational challenges into measurable business impact — from launching AI capabilities at scale to building first-of-their-kind product teams.
+          </p>
+          <p>
+            With a background in Industrial and Operations Engineering from Michigan and an MBA from Wharton, I bring both analytical rigor and strategic vision to everything I do. I thrive at the intersection of technology and operations, where I can lead cross-functional teams to deliver lasting change.
+          </p>
+          <p>
+            Outside of work, I'm a board member for Keep Music Alive, a former Michigan Marching Band performer, and an enthusiastic explorer of Philadelphia's food and wine scene.
+          </p>
+        </div>
+        <div class="about-details">
+          <div class="detail-block">
+            <h4>Currently</h4>
+            <ul>
+              <li>MBA Candidate, The Wharton School (2025–Present)</li>
+              <li>Tech Club Treasurer</li>
+              <li>FinTech Club Conference Operations Co-Chair</li>
+            </ul>
+          </div>
+          <div class="detail-block">
+            <h4>Certifications</h4>
+            <ul>
+              <li>Lean Six Sigma Green Belt Trained</li>
+              <li>Yellow Belt Certified</li>
+              <li>Agile Trained</li>
+            </ul>
+          </div>
+          <div class="detail-block">
+            <h4>Interests</h4>
+            <ul>
+              <li>Michigan football &amp; basketball</li>
+              <li>Maximizing travel rewards</li>
+              <li>Philadelphia food &amp; wine</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section id="experience">
+    <div class="container">
+      <p class="section-label">Career</p>
+      <h2 class="section-title">Experience</h2>
+      <div class="timeline">
+
+        <!-- Cigna -->
+        <div class="timeline-company" style="position:relative;">
+          <div class="timeline-dot"></div>
+          <div class="company-header">
+            <div>
+              <div class="company-name">The Cigna Group</div>
+              <div class="company-location">Philadelphia, PA</div>
+            </div>
+          </div>
+
+          <div class="role">
+            <div class="role-header">
+              <span class="role-title">Product Management Senior Advisor</span>
+              <span class="role-date">2024 – 2025</span>
+            </div>
+            <ul>
+              <li>Launched 4-month AI pilot that identified three new AI capabilities for daily operations; secured senior buy-in for a permanent product management team — <span class="highlight">projected to save $4M annually</span>.</li>
+              <li>Designed a custom GPT to streamline the appeals decision process, leading a cross-functional team of 20 through requirements definition and MVP creation — <span class="highlight">projected to cut turnaround time by 40%</span>.</li>
+              <li>Defined the multi-year operating model for a first-of-its-kind PM team bridging technology and operations to deliver enterprise-wide AI capabilities — <span class="highlight">projected to save $5M annually</span>.</li>
+            </ul>
+          </div>
+
+          <div class="role">
+            <div class="role-header">
+              <span class="role-title">Automation Strategy Lead Senior Advisor</span>
+              <span class="role-date">2022 – 2024</span>
+            </div>
+            <ul>
+              <li>Built a pipeline of 10 RDA and IDP automation project proposals for a struggling business unit, aligned to a multi-year strategy — <span class="highlight">projected $4.8M annual OpEx reduction</span>.</li>
+              <li>Partnered with finance, analytics, and operations to forecast automation savings quarterly; enabled leadership to <span class="highlight">reduce call center OpEx by $1.6M in 2023</span>.</li>
+              <li>Stood up and led an employee engagement committee for a newly formed 70-person team; planned monthly events that supported a <span class="highlight">95% retention rate in 2023</span>.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Express Scripts -->
+        <div class="timeline-company" style="position:relative;">
+          <div class="timeline-dot"></div>
+          <div class="company-header">
+            <div>
+              <div class="company-name">Express Scripts <span style="font-weight:normal;font-style:italic;color:var(--gray)">(Cigna Subsidiary)</span></div>
+              <div class="company-location">Philadelphia, PA</div>
+            </div>
+          </div>
+
+          <div class="role">
+            <div class="role-header">
+              <span class="role-title">Continuous Improvement Advisor <em style="font-size:0.85rem;color:var(--gold)">(promoted ahead of schedule)</em></span>
+              <span class="role-date">2021 – 2022</span>
+            </div>
+            <ul>
+              <li>Directed CI efforts for a 10-person cross-functional agile workstream, implementing Six Sigma–style projects — <span class="highlight">$500K annualized OpEx reduction</span>.</li>
+              <li>Built a Tableau tracker to surface equipment optimization opportunities in a pharmacy distribution center — <span class="highlight">$2M annual savings</span>.</li>
+              <li>Facilitated Kaizen and Rapid Problem Solving Events with operations leaders and front-line employees — <span class="highlight">$250K annual OpEx reduction</span>.</li>
+            </ul>
+          </div>
+
+          <div class="role">
+            <div class="role-header">
+              <span class="role-title">Continuous Improvement Lead Analyst</span>
+              <span class="role-date">2019 – 2021</span>
+            </div>
+            <ul>
+              <li>Developed a non-drug supply vendor tracker during COVID to document primary and secondary vendors for all critical supplies — <span class="highlight">became a permanent process change still in use today</span>.</li>
+              <li>Established a business case for a site-wide rework reduction initiative — <span class="highlight">resulted in $250K budgeted annual savings</span>.</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- EDUCATION -->
+  <section id="education">
+    <div class="container">
+      <p class="section-label">Academic Background</p>
+      <h2 class="section-title">Education</h2>
+      <div class="edu-grid">
+        <div class="edu-card">
+          <div class="edu-school">The Wharton School, University of Pennsylvania</div>
+          <div class="edu-degree">Master of Business Administration Candidate<br>Major: Operations, Information &amp; Decisions</div>
+          <div class="edu-date">2025 – Present &middot; Philadelphia, PA</div>
+          <ul class="edu-details">
+            <li>Tech Club Treasurer</li>
+            <li>FinTech Club Conference Operations Co-Chair</li>
+            <li>Wine Club Finance Committee</li>
+            <li>Coursework: Regression Analysis; Managerial Decision Making</li>
+          </ul>
+        </div>
+        <div class="edu-card">
+          <div class="edu-school">College of Engineering, University of Michigan</div>
+          <div class="edu-degree">BSE Industrial &amp; Operations Engineering<br>Minors: Music &amp; Sustainable Engineering</div>
+          <div class="edu-date">2015 – 2019 &middot; Ann Arbor, MI</div>
+          <ul class="edu-details">
+            <li>GPA: 3.7 &middot; Magna Cum Laude</li>
+            <li>Dean's List, 2016–2019</li>
+            <li>Accenture IOE Merit Scholarship Recipient</li>
+            <li>Michigan Marching Band — performer for audiences of 100,000+</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills">
+    <div class="container">
+      <p class="section-label">Capabilities</p>
+      <h2 class="section-title">Skills</h2>
+      <div class="skills-grid">
+        <div class="skill-category">
+          <h4>Technical</h4>
+          <div class="skill-tags">
+            <span class="skill-tag">Python</span>
+            <span class="skill-tag">Java</span>
+            <span class="skill-tag">SQL</span>
+            <span class="skill-tag">Tableau</span>
+            <span class="skill-tag">Matlab</span>
+            <span class="skill-tag">JMP</span>
+          </div>
+        </div>
+        <div class="skill-category">
+          <h4>Tools &amp; Platforms</h4>
+          <div class="skill-tags">
+            <span class="skill-tag">Jira</span>
+            <span class="skill-tag">Confluence</span>
+            <span class="skill-tag">Microsoft 365</span>
+            <span class="skill-tag">Custom GPT / AI Tools</span>
+          </div>
+        </div>
+        <div class="skill-category">
+          <h4>Methodologies</h4>
+          <div class="skill-tags">
+            <span class="skill-tag">Lean Six Sigma (Green Belt)</span>
+            <span class="skill-tag">Agile / Scrum</span>
+            <span class="skill-tag">Kaizen</span>
+            <span class="skill-tag">RDA / IDP Automation</span>
+          </div>
+        </div>
+        <div class="skill-category">
+          <h4>Leadership</h4>
+          <div class="skill-tags">
+            <span class="skill-tag">Product Management</span>
+            <span class="skill-tag">Cross-functional Teams</span>
+            <span class="skill-tag">Stakeholder Management</span>
+            <span class="skill-tag">Operating Model Design</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COMMUNITY -->
+  <section id="community">
+    <div class="container">
+      <p class="section-label">Beyond Work</p>
+      <h2 class="section-title">Community &amp; Interests</h2>
+      <div class="community-grid">
+        <div class="community-card">
+          <div class="community-icon">🎵</div>
+          <div class="community-title">Keep Music Alive</div>
+          <div class="community-desc">Board Member since January 2024. Assist with fundraising, volunteer outreach, and free musical instrument demonstrations to ensure every child can learn music.</div>
+        </div>
+        <div class="community-card">
+          <div class="community-icon">🥁</div>
+          <div class="community-title">Michigan Marching Band</div>
+          <div class="community-desc">Selected performer for home football and basketball games at the University of Michigan, performing for audiences of 100,000+.</div>
+        </div>
+        <div class="community-card">
+          <div class="community-icon">✈️</div>
+          <div class="community-title">Travel &amp; Food</div>
+          <div class="community-desc">Passionate about maximizing credit card points to explore new destinations, and exploring Philadelphia's celebrated food and wine scene.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="container">
+      <p class="section-label">Let's Connect</p>
+      <h2 class="section-title">Get In Touch</h2>
+      <p class="contact-intro">
+        Whether you'd like to discuss opportunities, collaborate on a project, or just say hello — I'd love to hear from you.
+      </p>
+      <div class="contact-links">
+        <a href="mailto:edavi27@wharton.upenn.edu" class="contact-link">
+          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+            <polyline points="22,6 12,13 2,6"/>
+          </svg>
+          edavi27@wharton.upenn.edu
+        </a>
+        <a href="tel:7039391793" class="contact-link">
+          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.12 1.18 2 2 0 012.1 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/>
+          </svg>
+          703-939-1793
+        </a>
+        <a href="https://www.linkedin.com/in/erica-davidson-328969135/" target="_blank" rel="noopener" class="contact-link">
+          <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/>
+            <circle cx="4" cy="4" r="2"/>
+          </svg>
+          LinkedIn
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    &copy; 2026 Erica Davidson &middot; Built with care
+  </footer>
+
+</body>
+</html>
